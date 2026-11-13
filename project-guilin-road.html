@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>桂林公路《我在》· AI 执行导演</title>
+  <meta name="description" content="桂林公路行业宣传片《我在》项目详情 —— 公路纪实拍摄、剪辑与成片。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .project__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+    .project__back:hover { color: #fff; }
+
+    .project__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .project__title {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 68px);
+      line-height: 1.06;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .project__cn {
+      font-family: var(--serif-cn);
+      font-size: clamp(19px, 2.3vw, 26px);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      margin-top: 12px;
+    }
+
+    .project__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project__tags li {
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(255, 122, 60, 0.45);
+      color: rgba(255, 158, 118, 0.95);
+      font-size: 12px;
+    }
+
+    .project__year {
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(245, 248, 255, 0.9);
+    }
+
+    .project__video {
+      margin-top: 40px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #04070e;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .project__video video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 78vh;
+    }
+
+    .project__body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 54px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .project__body h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project__text {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+    .project__text + .project__text { margin-top: 14px; }
+
+    .project__facts {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .project__facts div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .project__facts dt { color: var(--text-faint); letter-spacing: 0.06em; }
+    .project__facts dd { color: var(--text); text-align: right; }
+
+    .project__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .project__foot {
+      margin-top: 70px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .project { padding: 108px 18px 32px; }
+      .project__body { grid-template-columns: 1fr; gap: 34px; }
+      .project__video video { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav is-in">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="project">
+    <a class="project__back" href="index.html#film">← 返回实拍经历</a>
+
+    <div class="project__head">
+      <div>
+        <p class="eyebrow">Project · Road Documentary</p>
+        <h1 class="project__title">I Am Here</h1>
+        <p class="project__cn">桂林公路 ·《我在》</p>
+        <ul class="project__tags">
+          <li>公路纪实</li>
+          <li>桂林</li>
+          <li>拍摄 / 剪辑</li>
+        </ul>
+      </div>
+      <span class="project__year">2026</span>
+    </div>
+
+    <div class="project__video">
+      <video id="roadFilm" controls playsinline preload="metadata"
+             poster="assets/img/project-guilin-road-cover.jpg">
+        <source src="assets/video/guilin-road.mp4" type="video/mp4" />
+        你的浏览器不支持 HTML5 视频播放。
+      </video>
+    </div>
+
+    <div class="project__body">
+      <div>
+        <h2>关于项目</h2>
+        <p class="project__text">
+          雪后的隘门界隧道、雨雾中的省道、边坡上的橙衣养护队 —— 《我在》以“我在现场”为线索，
+          记录桂林公路人一年四季在路上的状态，用一条条真实的公路串起他们的工作日常。
+        </p>
+        <p class="project__text">
+          我参与拍摄与剪辑：跟随养护、路政与应急队伍多点位取景，把风雪、暴雨、烈日下的作业现场
+          按情绪重新组织成章节；后期完成数据字幕的版式统一、调色与声音处理，
+          让“我在”这两个字成为整支片子的节奏落点。
+        </p>
+
+        <div class="project__actions">
+          <a class="btn btn--cream" href="index.html#film">返回实拍经历</a>
+        </div>
+      </div>
+
+      <dl class="project__facts">
+        <div><dt>项目类型</dt><dd>行业宣传片 / 纪实</dd></div>
+        <div><dt>我的角色</dt><dd>拍摄 / 剪辑</dd></div>
+        <div><dt>拍摄地点</dt><dd>桂林（省道沿线）</dd></div>
+        <div><dt>工作内容</dt><dd>多点位跟拍 · 章节剪辑 · 字幕调色</dd></div>
+        <div><dt>年份</dt><dd>2026</dd></div>
+        <div><dt>片长</dt><dd>约 2 分 41 秒</dd></div>
+      </dl>
+    </div>
+
+    <div class="project__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Film Experience · Road</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

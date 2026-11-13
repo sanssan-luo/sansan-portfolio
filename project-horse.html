@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>马年大吉 · Year of the Horse · 创意广告 · AI 执行导演</title>
+  <meta name="description" content="创意广告短片《马年大吉》项目详情 —— 金红云海、落日骏马与金色粒子主视觉，含完整成片。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .project__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+    .project__back:hover { color: #fff; }
+
+    .project__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .project__title {
+      font-family: var(--display);
+      font-size: clamp(34px, 5.6vw, 74px);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .project__cn {
+      font-family: var(--serif-cn);
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    .project__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project__tags li {
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(255, 122, 60, 0.45);
+      color: rgba(255, 158, 118, 0.95);
+      font-size: 12px;
+    }
+
+    .project__year {
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(245, 248, 255, 0.9);
+    }
+
+    .project__video {
+      margin-top: 46px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #04070e;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .project__video video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 78vh;
+    }
+
+    .project__body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 54px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .project__body h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project__text {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+    .project__text + .project__text { margin-top: 14px; }
+
+    .project__facts {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .project__facts div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .project__facts dt { color: var(--text-faint); letter-spacing: 0.06em; }
+    .project__facts dd { color: var(--text); text-align: right; }
+
+    .project__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .project__foot {
+      margin-top: 70px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .project { padding: 108px 18px 32px; }
+      .project__body { grid-template-columns: 1fr; gap: 34px; }
+      .project__video video { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav is-in">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="projects.html" class="is-active">全部项目</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="project">
+    <a class="project__back" href="projects.html">← 返回全部项目</a>
+
+    <div class="project__head">
+      <div>
+        <p class="eyebrow">Project · Festival Commercial</p>
+        <h1 class="project__title">Year of the Horse</h1>
+        <p class="project__cn">《马年大吉 · 2025》</p>
+        <ul class="project__tags">
+          <li>创意广告</li>
+          <li>节庆</li>
+          <li>AI 生成</li>
+          <li>中国风</li>
+        </ul>
+      </div>
+      <span class="project__year">2025</span>
+    </div>
+
+    <div class="project__video">
+      <video id="horseFilm" controls playsinline preload="metadata"
+             poster="assets/img/project-horse-cover.jpg">
+        <source src="assets/video/horse-newyear.mp4" type="video/mp4" />
+        你的浏览器不支持 HTML5 视频播放。
+      </video>
+    </div>
+
+    <div class="project__body">
+      <div>
+        <h2>关于项目</h2>
+        <p class="project__text">
+          金红云海翻涌，巨型落日悬在山脊之上，骏马踏云而起 ——《马年大吉》以一支节庆广告，
+          把“奔腾向前”的祝福做成可被看见的力量感。
+        </p>
+        <p class="project__text">
+          我负责概念设定与整支片子的生成执行：以暖金与正红的色温关系搭建层次，用云海、光尘与金色流线
+          组织画面节奏，统一 AI 生成镜头中的马匹形态与光影方向，并完成字体排版的动效合成与最终调色。
+        </p>
+
+        <div class="project__actions">
+          <a class="btn btn--cream" href="project-horse-posters.html">新年海报</a>
+        </div>
+      </div>
+
+      <dl class="project__facts">
+        <div><dt>项目类型</dt><dd>节庆创意广告（AI 生成）</dd></div>
+        <div><dt>我的角色</dt><dd>概念 / 生成 / 动效合成</dd></div>
+        <div><dt>工作内容</dt><dd>场景概念 · 粒子特效 · 剪辑调色</dd></div>
+        <div><dt>年份</dt><dd>2025</dd></div>
+        <div><dt>片长</dt><dd>见上方成片</dd></div>
+      </dl>
+    </div>
+
+    <div class="project__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Creative Ads · 02</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DaVinci Resolve ·《黄金时刻》· AI 执行导演</title>
+  <meta name="description" content="DaVinci Resolve 调色项目《黄金时刻》—— 达芬奇一级与二级调色、成片展示。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .project__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+    .project__back:hover { color: #fff; }
+
+    .project__cover {
+      position: relative;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 16 / 8;
+      background: #060a13;
+    }
+    .project__cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: coverDrift 30s ease-in-out infinite alternate;
+    }
+    @keyframes coverDrift {
+      from { transform: scale(1); }
+      to { transform: scale(1.07) translateY(-1.5%); }
+    }
+
+    .project__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .project__title {
+      font-family: var(--display);
+      font-size: clamp(34px, 5.4vw, 74px);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .project__cn {
+      font-family: var(--serif-cn);
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    .project__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project__tags li {
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(255, 122, 60, 0.45);
+      color: rgba(255, 158, 118, 0.95);
+      font-size: 12px;
+    }
+
+    .project__year {
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(245, 248, 255, 0.9);
+    }
+
+    .project__video {
+      margin-top: 46px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #04070e;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .project__video video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 78vh;
+    }
+
+    .project__body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 54px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .project__body h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project__text {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+    .project__text + .project__text { margin-top: 14px; }
+
+    .project__facts {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .project__facts div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .project__facts dt { color: var(--text-faint); letter-spacing: 0.06em; }
+    .project__facts dd { color: var(--text); text-align: right; }
+
+    .project__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .project__foot {
+      margin-top: 70px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .project { padding: 108px 18px 32px; }
+      .project__body { grid-template-columns: 1fr; gap: 34px; }
+      .project__cover { aspect-ratio: 16 / 10; }
+      .project__video video { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav is-in">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="project">
+    <a class="project__back" href="index.html#film">← 返回实拍经历</a>
+
+
+    <div class="project__head">
+      <div>
+        <p class="eyebrow">Project · Color Grading</p>
+        <h1 class="project__title">DaVinci Resolve</h1>
+        <p class="project__cn">《黄金时刻》· 达芬奇调色</p>
+        <ul class="project__tags">
+          <li>DaVinci Resolve</li>
+          <li>一级 / 二级调色</li>
+          <li>航拍素材</li>
+        </ul>
+      </div>
+      <span class="project__year">2026</span>
+    </div>
+
+    <div class="project__video">
+      <video id="resolveFilm" controls playsinline preload="metadata"
+             poster="assets/img/project-resolve-cover.jpg">
+        <source src="assets/video/resolve-golden-hour.mp4" type="video/mp4" />
+        你的浏览器不支持 HTML5 视频播放。
+      </video>
+    </div>
+
+    <div class="project__body">
+      <div>
+        <h2>关于项目</h2>
+        <p class="project__text">
+          日落前的最后一段光线落在山间的校园与公路上 —— 《黄金时刻》是一支以光影为线索的航拍片段，
+          在 DaVinci Resolve 中完成从技术校正到风格化的完整调色。
+        </p>
+        <p class="project__text">
+          流程上先做一级校正统一白平衡与曝光，再通过二级调色分离跑道、草地、建筑与天空，
+          压暗环境、提亮日照面，让暖金色的侧光成为画面主角；最后处理肤色与高光滚降，
+          并在输出前做胶片感的颗粒与轻微辉光，让整支片子保持统一的质感。
+        </p>
+
+        <div class="project__actions">
+          <a class="btn btn--cream" href="index.html#film">返回实拍经历</a>
+        </div>
+      </div>
+
+      <dl class="project__facts">
+        <div><dt>项目类型</dt><dd>调色 / 后期</dd></div>
+        <div><dt>使用软件</dt><dd>DaVinci Resolve</dd></div>
+        <div><dt>工作内容</dt><dd>一级校正 · 二级分离 · 风格化输出</dd></div>
+        <div><dt>素材类型</dt><dd>航拍 / 黄金时刻</dd></div>
+        <div><dt>年份</dt><dd>2026</dd></div>
+        <div><dt>片长</dt><dd>见上方成片</dd></div>
+      </dl>
+    </div>
+
+    <div class="project__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Film Experience · Color</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

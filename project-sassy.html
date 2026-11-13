@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claimed by the Gangster Queen · GL 黑帮情感短片 · AI 执行导演</title>
+  <meta name="description" content="GL 黑帮情感短片 Claimed by the Gangster Queen 项目详情 —— 叛逆黑帮少主与修车女孩的宿命邂逅，含完整成片。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .project__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+    .project__back:hover { color: #fff; }
+
+    .project__cover {
+      position: relative;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 16 / 8;
+      background: #060a13;
+    }
+    .project__cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: coverDrift 30s ease-in-out infinite alternate;
+    }
+    @keyframes coverDrift {
+      from { transform: scale(1); }
+      to { transform: scale(1.07) translateY(-1.5%); }
+    }
+
+    .project__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .project__title {
+      font-family: var(--display);
+      font-size: clamp(44px, 7vw, 92px);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .project__cn {
+      font-family: var(--serif-cn);
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    .project__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project__tags li {
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(255, 122, 60, 0.45);
+      color: rgba(255, 158, 118, 0.95);
+      font-size: 12px;
+    }
+
+    .project__year {
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(245, 248, 255, 0.9);
+    }
+
+    .project__video {
+      margin-top: 46px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #04070e;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .project__video video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 78vh;
+    }
+
+    .project__body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 54px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .project__body h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project__text {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+    .project__text + .project__text { margin-top: 14px; }
+
+    .project__links {
+      margin-top: 16px;
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: var(--text-dim);
+      word-break: break-all;
+    }
+    .project__link-label {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .project__link {
+      color: rgba(146, 194, 255, 0.95);
+      border-bottom: 1px solid rgba(146, 194, 255, 0.35);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .project__link:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project__facts {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .project__facts div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .project__facts dt { color: var(--text-faint); letter-spacing: 0.06em; }
+    .project__facts dd { color: var(--text); text-align: right; }
+
+    .project__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .project__foot {
+      margin-top: 70px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .project { padding: 108px 18px 32px; }
+      .project__body { grid-template-columns: 1fr; gap: 34px; }
+      .project__cover { aspect-ratio: 16 / 10; }
+      .project__video video { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav is-in">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="project">
+    <a class="project__back" href="javascript:history.back()">← 返回上一步</a>
+
+
+    <div class="project__head">
+      <div>
+        <p class="eyebrow">Project · GL Crime Romance</p>
+        <h1 class="project__title">Claimed by the Gangster Queen</h1>
+        <ul class="project__tags">
+          <li>GL</li>
+          <li>黑帮</li>
+          <li>女强</li>
+        </ul>
+      </div>
+      <span class="project__year">2026</span>
+    </div>
+
+    <div class="project__video">
+      <video id="sassyFilm" controls playsinline preload="metadata"
+             poster="assets/img/project-sassy-cover.png">
+        <source src="assets/video/sassy-02.mp4" type="video/mp4" />
+        你的浏览器不支持 HTML5 视频播放。
+      </video>
+    </div>
+
+    <div class="project__body">
+      <div>
+        <h2>关于项目</h2>
+        <p class="project__text">
+          题材：GL / 黑帮 / 女强 / 禁忌拉扯 / 身份成长
+        </p>
+        <p class="project__text">
+          剧情亮点：单杀敌首的叛逆黑帮少主 × 软萌善良的修车女孩
+        </p>
+        <p class="project__text">一场机车相撞的宿命邂逅</p>
+        <p class="project__text">无麻取弹的极限暧昧</p>
+        <p class="project__text">家仇横亘的禁忌拉扯</p>
+        <p class="project__text">家族逼婚的生死抉择</p>
+        <p class="project__text">黑道恶女被普通人的善良驯化</p>
+        <p class="project__text">刀光剑影里双向救赎，并肩余生。</p>
+
+        <p class="project__links">
+          <span class="project__link-label">DramaBox：</span>
+          <a class="project__link" href="https://www.dramaboxdb.com/ep/42000021309_seduced-by-my-boyfriend-s-uncle/701309347_Episode-1" target="_blank" rel="noopener">https://www.dramaboxdb.com/ep/42000021309_seduced-by-my-boyfriend-s-uncle/701309347_Episode-1</a>
+        </p>
+        <p class="project__links">
+          <span class="project__link-label">YouTube：</span>
+          <a class="project__link" href="https://www.youtube.com/watch?v=ZcELXuQ_IzA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=ZcELXuQ_IzA</a>
+        </p>
+
+        <div class="project__actions">
+          <a class="btn btn--cream" href="project-sassy-characters.html">查看人物形象</a>
+        </div>
+      </div>
+
+      <dl class="project__facts">
+        <div><dt>项目类型</dt><dd>GL 黑帮情感短片（AI 生成）</dd></div>
+        <div><dt>我的角色</dt><dd>执行导演 / 分镜 / 成片</dd></div>
+        <div><dt>工作内容</dt><dd>场景概念 · 光影设计 · 剪辑调色</dd></div>
+        <div><dt>年份</dt><dd>2026</dd></div>
+        <div><dt>片长</dt><dd>见上方成片</dd></div>
+      </dl>
+    </div>
+
+    <div class="project__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Selected Work · 04</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

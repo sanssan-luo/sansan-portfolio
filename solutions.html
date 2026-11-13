@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>能解决什么 · 降本 / 并行 / 统一 / 可控 · AI 执行导演</title>
+  <meta name="description" content="AI 影像制作常见问题的解法：预算不足用 AI 补足产能、周期紧用生成与实拍并行、风格不稳用视觉规范与提示词库锁住质感、质量靠五张表与质检表把控。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .solve {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 128px 24px 70px;
+    }
+
+    .solve__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 26px;
+      transition: color 0.3s;
+    }
+    .solve__back:hover { color: #fff; }
+
+    .solve__head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 720px;
+      margin-bottom: 46px;
+    }
+
+    .solve__title {
+      font-size: clamp(34px, 5.4vw, 62px);
+      line-height: 1.06;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .solve__title em {
+      font-family: var(--serif-en);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .solve__desc {
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--text-dim);
+    }
+
+    .solve__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .pain {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 28px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-card);
+      background: rgba(10, 14, 24, 0.7);
+    }
+
+    .pain__q {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 158, 118, 0.95);
+    }
+
+    .pain__title { font-size: 19px; font-weight: 800; }
+
+    .pain__text {
+      font-size: 13.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+
+    .pain__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .pain__list li {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: var(--r-pill);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      color: var(--text-dim);
+    }
+
+    /* 卡片附件：截图 / 文档 / 外链 */
+    .pain__shot {
+      position: relative;
+      display: block;
+      margin-top: 6px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .pain__shot img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s var(--ease);
+    }
+    .pain__shot:hover img { transform: scale(1.03); }
+    .pain__shot span {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 6px 11px;
+      border-radius: var(--r-pill);
+      background: rgba(6, 9, 16, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .pain__shot:hover span {
+      background: rgba(109, 179, 255, 0.85);
+      border-color: rgba(109, 179, 255, 0.9);
+    }
+
+    .pain__files {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .pain__file {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 9px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(109, 179, 255, 0.35);
+      background: rgba(109, 179, 255, 0.1);
+      color: rgba(170, 210, 255, 0.95);
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .pain__file:hover {
+      background: rgba(109, 179, 255, 0.22);
+      border-color: rgba(109, 179, 255, 0.6);
+      color: #fff;
+    }
+
+    .solve__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .solve__foot {
+      margin-top: 50px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .solve { padding: 108px 18px 48px; }
+      .solve__grid { grid-template-columns: 1fr; gap: 14px; }
+      .pain { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="solve">
+    <a class="solve__back" href="index.html#strength">← 返回个人优势</a>
+
+    <div class="solve__head reveal">
+      <p class="eyebrow">Solutions · What I Solve</p>
+      <h1 class="solve__title">能解决 <em>什么</em></h1>
+      <p class="solve__desc">
+        预算不够拍不起？AI 补足产能。周期太赶？生成与实拍并行。
+        风格不稳定？我用统一的视觉规范与提示词库锁住质感。
+        下面四类问题，是我在项目里最常接手的。
+      </p>
+    </div>
+
+    <div class="solve__grid">
+      <article class="pain reveal">
+        <p class="pain__q">Pain 01 · 预算</p>
+        <h2 class="pain__title">预算不够，拍不起</h2>
+        <p class="pain__text">
+          大场面、群戏、异国场景最吃预算。先用 AI 把不可控的外景与规模做出来，
+          把实拍预算集中投在演员与关键情绪镜头上，同样的钱能多出两到三倍的可用镜头。
+        </p>
+        <ul class="pain__list">
+          <li>AI 补足产能</li><li>大场面替代</li><li>预算重分配</li>
+        </ul>
+        <a class="pain__shot" href="assets/img/workflow/pain-1.png" target="_blank" rel="noopener">
+          <img src="assets/img/workflow/pain-1.png" alt="场景与道具批量生成的 SOP 提示词流程截图" loading="lazy">
+          <span>查看流程截图 ↗</span>
+        </a>
+      </article>
+
+      <article class="pain reveal" data-delay="1">
+        <p class="pain__q">Pain 02 · 周期</p>
+        <h2 class="pain__title">周期太赶，来不及</h2>
+        <p class="pain__text">
+          生成与实拍并行跑：AI 段落先出片，实拍段落同步进组；剪辑与调色在素材回流时就开始做，
+          交付周期按“集”滚动推进，不用等全片杀青。
+        </p>
+        <ul class="pain__list">
+          <li>生成实拍并行</li><li>分集滚动交付</li><li>边拍边剪</li>
+        </ul>
+        <a class="pain__shot" href="assets/img/workflow/pain-2.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/workflow/pain-2.jpg" alt="人群库与资产库界面截图" loading="lazy">
+          <span>查看资产库 ↗</span>
+        </a>
+      </article>
+
+      <article class="pain reveal" data-delay="2">
+        <p class="pain__q">Pain 03 · 风格</p>
+        <h2 class="pain__title">风格不稳定，一眼假</h2>
+        <p class="pain__text">
+          用视觉规范把“感觉”写成参数：主色与辅色、光源方向、镜头焦段、材质与颗粒，
+          再沉淀成提示词库与角色 / 场景资产表，换人换天也能复现同一套质感。
+        </p>
+        <ul class="pain__list">
+          <li>视觉规范</li><li>提示词库</li><li>资产表复用</li>
+        </ul>
+        <a class="pain__shot" href="assets/img/workflow/pain-3.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/workflow/pain-3.jpg" alt="角色换装与服饰素材库界面截图" loading="lazy">
+          <span>查看换装界面 ↗</span>
+        </a>
+      </article>
+
+      <article class="pain reveal" data-delay="3">
+        <p class="pain__q">Pain 04 · 质量</p>
+        <h2 class="pain__title">质量不可控，反复返工</h2>
+        <p class="pain__text">
+          把验收前置：分镜执行表对齐镜头与提示词，成片质检表逐项对照一致性、口型、字幕、混音与平台规格，
+          问题在当天就回炉，不留到交付前夜。
+        </p>
+        <ul class="pain__list">
+          <li>分镜执行表</li><li>成片质检表</li><li>当天回炉</li>
+        </ul>
+        <div class="pain__files">
+          <a class="pain__file" href="assets/docs/costume-ai-sop.docx" download>下载策划方案 · docx ↓</a>
+          <a class="pain__file" href="https://opendrama.netlify.app/" target="_blank" rel="noopener">opendrama.netlify.app ↗</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="solve__actions">
+      <a class="btn btn--cream" href="index.html#strength">返回个人优势</a>
+      <a class="btn btn--pill btn--ghost" href="workflow.html">看五张表 <span class="btn__arrow">↗</span></a>
+    </div>
+
+    <div class="solve__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Solutions · Four Pains</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

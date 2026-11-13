@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>罗姗姗个人作品集 · AI 执行导演</title>
+  <meta name="description" content="罗姗姗个人作品集 —— AI 执行导演。AI 短剧、创意广告与视觉实验项目，含完整成片与人物、场景设定。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══════════ 背景宇宙层 ══════════ -->
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <!-- ══════════ 悬浮胶囊导航 ══════════ -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="返回顶部">AI·DIRECTOR</a>
+    <nav class="nav__links" id="navLinks" aria-label="主导航">
+      <a href="#work" data-nav>作品</a>
+      <a href="projects.html">全部项目</a>
+      <a href="#strength" data-nav>优势</a>
+      <a href="#film" data-nav>实拍</a>
+      <a href="#contact" data-nav>联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+    <button class="nav__burger" id="navBurger" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- 移动端抽屉菜单 -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav class="drawer__links">
+      <a href="#work" data-drawer-link>作品 <em>Work</em></a>
+      <a href="projects.html" data-drawer-link>全部项目 <em>Archive</em></a>
+      <a href="#strength" data-drawer-link>优势 <em>Strength</em></a>
+      <a href="#film" data-drawer-link>实拍 <em>Film</em></a>
+      <a href="#contact" data-drawer-link>联系 <em>Contact</em></a>
+    </nav>
+    <a class="btn btn--pill btn--light drawer__cta" href="mailto:283104584@qq.com" data-drawer-link>
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </div>
+
+  <main id="top">
+
+    <!-- ══════════ 01 · HERO 首屏 · 图片进场（ORBITALS 风格） ══════════ -->
+    <section class="hero" id="hero">
+      <!-- 场景层：黑洞漩涡 -->
+      <div class="scene" aria-hidden="true">
+        <canvas class="scene__vortex" id="vortex"></canvas>
+      </div>
+
+      <!-- 图片进场拼贴 -->
+      <div class="collage" aria-hidden="true">
+        <figure class="panel panel--l" style="--d:.55s">
+          <div class="panel__inner" data-depth="26"><img src="assets/img/gothic-04.png" alt=""></div>
+        </figure>
+        <figure class="panel panel--l2" style="--d:.75s">
+          <div class="panel__inner" data-depth="16"><img src="assets/img/gothic-05.png" alt=""></div>
+        </figure>
+        <figure class="panel panel--c" style="--d:.25s">
+          <div class="panel__inner" data-depth="10">
+            <img id="slideImg" src="assets/img/gothic-01.png" alt="">
+            <canvas id="planetFx" aria-hidden="true"></canvas>
+            <button class="panel__nav panel__nav--prev" id="heroPrev" aria-label="上一张">&#8249;</button>
+            <button class="panel__nav panel__nav--next" id="heroNext" aria-label="下一张">&#8250;</button>
+            <p class="panel__caption" id="slideCaption">The city sleeps beneath the bell.</p>
+          </div>
+        </figure>
+        <figure class="panel panel--r1" style="--d:.65s">
+          <div class="panel__inner" data-depth="30"><img src="assets/img/gothic-03.png" alt=""></div>
+        </figure>
+        <figure class="panel panel--r2" style="--d:.85s">
+          <div class="panel__inner" data-depth="20"><img src="assets/img/gothic-02.png" alt=""></div>
+        </figure>
+
+      </div>
+
+      <!-- 主内容 -->
+      <div class="hero__content" id="heroContent">
+        <p class="hero__eyebrow"><span class="hero__dot"></span><span id="slideTag">TOP · SHOWREEL</span></p>
+        <h1 class="hero__title" id="heroTitle" aria-label="AI DIRECTOR"></h1>
+        <p class="hero__cn" id="slideCn">AI 执行导演</p>
+        <p class="hero__desc" id="slideDesc">用 AI 编排光影与叙事 —— 从概念、分镜到成片的一条完整链路。</p>
+        <div class="hero__actions">
+          <a class="btn btn--cream" href="projects.html">查看全部项目</a>
+        </div>
+      </div>
+
+      <div class="hero__dock">
+        <a class="hero__all" href="projects.html">查看全部项目 <span>→</span></a>
+        <div class="hero__thumbs" id="heroThumbs">
+          <button class="thumb is-active" data-slide="0"><img src="assets/img/gothic-01.png" alt=""></button>
+          <button class="thumb" data-slide="1"><img src="assets/img/gothic-02.png" alt=""></button>
+          <button class="thumb" data-slide="2"><img src="assets/img/gothic-03.png" alt=""></button>
+          <button class="thumb" data-slide="3"><img src="assets/img/gothic-04.png" alt=""></button>
+          <button class="thumb" data-slide="4"><img src="assets/img/gothic-05.png" alt=""></button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 02 · 项目展示 ══════════ -->
+    <section class="section" id="work">
+      <div class="section__head reveal">
+        <div>
+          <p class="eyebrow">Selected Work</p>
+          <h2 class="section__title">精选 <em>项目</em></h2>
+          <p class="section__desc">首页陈列 4 个主推项目，其余项目统一收录于「全部项目」索引页。</p>
+        </div>
+        <a class="btn btn--pill btn--ghost section__more" href="projects.html">进入全部项目 <span class="btn__arrow">↗</span></a>
+      </div>
+
+      <div class="work-grid">
+        <article class="card reveal" data-tilt>
+          <div class="card__media">
+            <img src="assets/img/project-mermaid-cover.png" alt="《In Love with the King of the Ocean》风暴中的帆船 场景概念图">
+            <span class="card__year">2026</span>
+          </div>
+          <div class="card__meta">
+            <h3 class="card__name">《In Love with the King of the Ocean》</h3>
+            <p class="card__note">AI 叙事短片 · 风暴海难 · 导演 / 分镜 / 生成管线</p>
+            <ul class="card__tags">
+              <li>AI 短剧</li>
+              <li>风暴海难</li>
+              <li>完整成片</li>
+            </ul>
+          </div>
+          <a class="card__link" href="project-mermaid.html" aria-label="查看《In Love with the King of the Ocean》项目详情"></a>
+          <a class="card__hover-pill" href="project-mermaid.html" aria-label="查看案例">查看 — Ocean King</a>
+        </article>
+
+        <article class="card reveal" data-delay="1" data-tilt>
+          <div class="card__media">
+            <img src="assets/img/project-pucked-cover.jpg" alt="《Pucked by My Brother's Rival》冰球馆内场 场景概念图">
+            <span class="card__year">2026</span>
+          </div>
+          <div class="card__meta">
+            <h3 class="card__name">《Pucked by My Brother's Rival》</h3>
+            <p class="card__note">冰球禁忌恋情 · 51 集竖版短剧 · 导演 / 成片</p>
+            <ul class="card__tags">
+              <li>现代爱情</li>
+              <li>冰球运动</li>
+              <li>51 集</li>
+            </ul>
+          </div>
+          <a class="card__link" href="project-pucked.html" aria-label="查看《Pucked by My Brother's Rival》项目详情"></a>
+          <a class="card__hover-pill" href="project-pucked.html" aria-label="查看案例">查看 — Pucked by My Brother's Rival</a>
+        </article>
+
+        <article class="card reveal" data-delay="2" data-tilt>
+          <div class="card__media">
+            <img src="assets/img/project-professor-cover.png" alt="《My Professor Daddy Is My Best Friend's Father!》美术教室 场景封面">
+            <span class="card__year">2026</span>
+          </div>
+          <div class="card__meta">
+            <h3 class="card__name">《My Professor Daddy Is My Best Friend's Father!》</h3>
+            <p class="card__note">BL 校园爱情 · 禁忌关系 / 师生 / 双男主 · 导演 / 成片</p>
+            <ul class="card__tags">
+              <li>BL 校园</li>
+              <li>师生</li>
+              <li>双男主</li>
+            </ul>
+          </div>
+          <a class="card__link" href="project-professor.html" aria-label="查看《My Professor Daddy Is My Best Friend's Father!》项目详情"></a>
+          <a class="card__hover-pill" href="project-professor.html" aria-label="查看案例">查看 — 教授先生</a>
+        </article>
+
+        <article class="card reveal" data-delay="3" data-tilt>
+          <div class="card__media">
+            <img src="assets/img/project-bl-cover.png" alt="《Seduced by my boyfriend's uncle》晨光中的林间小径 场景图">
+            <span class="card__year">2026</span>
+          </div>
+          <div class="card__meta">
+            <h3 class="card__name">《Seduced by my boyfriend's uncle》</h3>
+            <p class="card__note">BL 情感剧集 · 晨光树林 · 导演 / 48 集</p>
+            <ul class="card__tags">
+              <li>女频</li>
+              <li>BL</li>
+              <li>禁忌关系</li>
+              <li>强制爱</li>
+            </ul>
+          </div>
+          <a class="card__link" href="project-bl.html" aria-label="查看《Seduced by my boyfriend's uncle》项目详情"></a>
+          <a class="card__hover-pill" href="project-bl.html" aria-label="查看案例">查看 — Seduced</a>
+        </article>
+      </div>
+
+      <!-- ══════════ 配音项目 · 三段并排 ══════════ -->
+      <div class="voice-block" id="voice">
+        <div class="voice-block__head reveal">
+          <div>
+            <p class="eyebrow">Voice · AI Dubbing</p>
+            <h3 class="voice-block__title">数字人 <em>配音</em></h3>
+            <p class="voice-block__desc">三段竖版配音测试并排展示 —— 每段下方都能展开完整提示词，从声线设定、场景角色到逐句台词与情绪细节。</p>
+          </div>
+          <a class="btn btn--pill btn--ghost" href="project-digital-human.html">
+            项目详情 <span class="btn__arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="voice-row reveal">
+          <figure class="voice-card">
+            <div class="voice-card__media">
+              <video controls playsinline preload="metadata"
+                     poster="assets/img/seaside-girl-poster.jpg"
+                     src="assets/video/seaside-girl.mp4" aria-label="配音测试：海边阳台少女"></video>
+              <span class="voice-card__badge">00:15</span>
+            </div>
+            <figcaption class="voice-card__meta">
+              <span class="voice-card__name">配音测试 · 海边少女</span>
+              <span class="voice-card__sub">Voice Test 01 · 9:16</span>
+            </figcaption>
+            <button class="voice-toggle" type="button" data-prompt="voice-prompt-1"
+                    aria-expanded="false" aria-controls="voice-prompt-1">
+              查看提示词内容 <span class="voice-toggle__icon" aria-hidden="true">+</span>
+            </button>
+          </figure>
+
+          <figure class="voice-card">
+            <div class="voice-card__media">
+              <video controls playsinline preload="metadata"
+                     poster="assets/img/voice-test-01-poster.jpg"
+                     src="assets/video/voice-test-01.mp4" aria-label="配音测试 02：海边桀骜少年"></video>
+              <span class="voice-card__badge">00:15</span>
+            </div>
+            <figcaption class="voice-card__meta">
+              <span class="voice-card__name">配音测试 · 桀骜少年</span>
+              <span class="voice-card__sub">Voice Test 02 · 9:16</span>
+            </figcaption>
+            <button class="voice-toggle" type="button" data-prompt="voice-prompt-2"
+                    aria-expanded="false" aria-controls="voice-prompt-2">
+              查看提示词内容 <span class="voice-toggle__icon" aria-hidden="true">+</span>
+            </button>
+          </figure>
+
+          <figure class="voice-card">
+            <div class="voice-card__media">
+              <video controls playsinline preload="metadata"
+                     poster="assets/img/voice-test-03-poster.jpg"
+                     src="assets/video/voice-test-03.mp4" aria-label="配音测试 03：海边告白男声"></video>
+              <span class="voice-card__badge">00:15</span>
+            </div>
+            <figcaption class="voice-card__meta">
+              <span class="voice-card__name">配音测试 · 海边告白</span>
+              <span class="voice-card__sub">Voice Test 03 · 9:16</span>
+            </figcaption>
+            <button class="voice-toggle" type="button" data-prompt="voice-prompt-3"
+                    aria-expanded="false" aria-controls="voice-prompt-3">
+              查看提示词内容 <span class="voice-toggle__icon" aria-hidden="true">+</span>
+            </button>
+          </figure>
+        </div>
+
+        <div class="voice-panels">
+          <div class="voice-panel" id="voice-prompt-1" hidden>
+            <div class="voice-panel__head">
+              <div>
+                <p class="voice-panel__kicker">Prompt · 配音测试 01</p>
+                <p class="voice-panel__title">海边阳台 · 少女口吻 15 秒</p>
+                </div>
+                <button class="voice-panel__close" type="button" data-close="voice-prompt-1">收起 ×</button>
+                </div>
+
+                <div class="voice-specs">
+                <div class="voice-spec">
+                <h4>配音设定</h4>
+                <p>
+                  角色 1 的配音为美式的女性口音，温柔开心的情绪，带有年轻美国少女的口音。
+                </p>
+                </div>
+                <div class="voice-spec">
+                <h4>场景与角色</h4>
+                <p>
+                  场景设定在【图片 1】的海边阳台风景；角色 1 的人物五官、妆造严格参考【图片 2】。
+                </p>
+                </div>
+                <div class="voice-spec">
+                <h4>生成要求</h4>
+                <p>
+                  避免画面出现字幕，避免出现 BGM，输出无字幕纯净版视频；画质 8K 高清电影画质，真实清晰。
+                </p>
+                </div>
+                </div>
+
+                <div class="voice-lines">
+                <p class="voice-lines__label">台词 · Dialogue</p>
+                <p class="voice-lines__text">
+                Wow! We really did it! I stayed up so many late nights! We finally pulled it off!
+                This is everyone's victory! Let's celebrate, okay?
+                </p>
+                <p class="voice-lines__cn">
+                哇！我们真的做到了！我熬了那么多个通宵！我们终于成功了！这是大家的胜利！让我们庆祝一下，好吗？
+                </p>
+                </div>
+
+                <ol class="voice-shots">
+                <li class="voice-shot">
+                <span class="voice-shot__time">景别</span>
+                <span class="voice-shot__cue">中景 · 海边室外</span>
+                <p class="voice-shot__note">背景的海边风浪做虚化处理，人物占画面主体。</p>
+                </li>
+                <li class="voice-shot">
+                <span class="voice-shot__time">机位</span>
+                <span class="voice-shot__cue">平视，正对角色 1</span>
+                <p class="voice-shot__note">机位高度与人物视线齐平，正面对准角色 1。</p>
+                </li>
+                <li class="voice-shot">
+                <span class="voice-shot__time">构图</span>
+                <span class="voice-shot__cue">角色 1 居中</span>
+                <p class="voice-shot__note">站在海边室外的阳台栏杆侧，背景为【图片 1】的海边阳台风景。</p>
+                </li>
+                <li class="voice-shot">
+                <span class="voice-shot__time">运镜</span>
+                <span class="voice-shot__cue">固定镜头，无运镜</span>
+                <p class="voice-shot__note">全程机位稳定，靠人物表情与台词推进情绪。</p>
+                </li>
+                <li class="voice-shot">
+                <span class="voice-shot__time">人物</span>
+                <span class="voice-shot__cue">柔和带笑意 · 情绪轻松</span>
+                <p class="voice-shot__note">
+                  角色 1 站立在画面中心，面向对面的角色 2，面部妆容与服装参考【图片 2】，
+                  以兴奋又温柔的语气说完这段台词。
+                </p>
+                </li>
+                </ol>
+                </div>
+
+          <div class="voice-panel" id="voice-prompt-2" hidden>
+            <div class="voice-panel__head">
+              <div>
+                <p class="voice-panel__kicker">Prompt · 配音测试 02</p>
+                <p class="voice-panel__title">海边少年 · 桀骜自信 15 秒</p>
+              </div>
+              <button class="voice-panel__close" type="button" data-close="voice-prompt-2">收起 ×</button>
+            </div>
+
+            <div class="voice-specs">
+              <div class="voice-spec">
+                <h4>配音设定</h4>
+                <p>
+                  角色 1 的配音为美式的男性气泡音、磁性口音，开朗直率、积极向上的情绪，
+                  带有年轻美国男性口音。
+                </p>
+              </div>
+              <div class="voice-spec">
+                <h4>场景与角色</h4>
+                <p>
+                  场景设定在【图片 1】的海边阳台风景；角色 1 的人物五官、妆造严格参考【图片 2】。
+                </p>
+              </div>
+              <div class="voice-spec">
+                <h4>生成要求</h4>
+                <p>
+                  避免画面出现字幕、避免出现 BGM，输出无字幕纯净版视频；画质 8K 高清电影画质，真实清晰。
+                </p>
+              </div>
+            </div>
+
+            <div class="voice-lines">
+              <p class="voice-lines__label">台词 · Dialogue</p>
+              <p class="voice-lines__text">
+                Stand up! Don't bow down, don't back down! A true warrior never fears falling.
+                People are waiting for you behind. You have the strength! You can do this!
+                Now, are you ready to rise again?
+              </p>
+              <p class="voice-lines__cn">
+                站起来！别低头，别退缩！真正的勇士从不怕跌倒。你身后有人在等你。你有力量！你可以的！现在，准备好重新出发了吗？
+              </p>
+            </div>
+
+            <ol class="voice-shots">
+              <li class="voice-shot">
+                <span class="voice-shot__time">景别</span>
+                <span class="voice-shot__cue">中景 · 海边室外</span>
+                <p class="voice-shot__note">背景的海边风浪做虚化处理，人物占画面主体。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">机位</span>
+                <span class="voice-shot__cue">平视，正对角色 1</span>
+                <p class="voice-shot__note">机位与人物视线齐平，正面对准角色 1。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">构图</span>
+                <span class="voice-shot__cue">角色 1 居中</span>
+                <p class="voice-shot__note">站在海边室外的阳台栏杆侧，背景为【图片 1】的海边阳台风景。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">运镜</span>
+                <span class="voice-shot__cue">固定镜头，无运镜</span>
+                <p class="voice-shot__note">全程机位稳定，靠人物表情与台词推进情绪。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">人物</span>
+                <span class="voice-shot__cue">桀骜不驯 · 自信魅惑</span>
+                <p class="voice-shot__note">
+                  角色 1 站立在画面中心，面向角色 2，柔和带笑意、带着桀骜不驯的自信；
+                  五官与妆造参考【图片 2】，以开朗直率的语气说完这段台词。
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="voice-panel" id="voice-prompt-3" hidden>
+            <div class="voice-panel__head">
+              <div>
+                <p class="voice-panel__kicker">Prompt · 配音测试 03</p>
+                <p class="voice-panel__title">海边告白 · 15 秒男声独白</p>
+              </div>
+              <button class="voice-panel__close" type="button" data-close="voice-prompt-3">收起 ×</button>
+            </div>
+
+            <div class="voice-specs">
+              <div class="voice-spec">
+                <h4>配音基底</h4>
+                <p>
+                  年轻原生美式本土口音欧美男性声线，音色醇厚磁性、低沉沉稳，自带慵懒魅惑颗粒感，
+                  低音质感厚重，人声干净无杂音，原声收音、海边现场无损收音。
+                </p>
+              </div>
+              <div class="voice-spec">
+                <h4>情绪演绎细则</h4>
+                <p>
+                  开篇语速放缓轻柔，语气温柔坦诚，带着卸下防备的柔软；中段讲述破碎过往与相处点滴时，声线微沉，
+                  共情温润，语气缱绻走心，语速舒缓；尾句加重磁性声压，语气笃定深情、郑重宠溺，音量微微沉厚拔高，
+                  传递笃定偏爱与珍视感。整体气息舒缓绵长，咬字慵懒克制，情感递进完整，适配双人走心告白氛围。
+                </p>
+              </div>
+              <div class="voice-spec">
+                <h4>人声收音</h4>
+                <p>
+                  原生现场人声，保留轻微海风环境底噪，人声清晰度高于环境音，人声立体通透，
+                  无修音失真，纯真人原声演绎。
+                </p>
+              </div>
+            </div>
+
+            <div class="voice-lines">
+              <p class="voice-lines__label">台词 · Dialogue</p>
+              <p class="voice-lines__text">
+                You jus let me be me. All the messy, broken parts. Every quiet morning,
+                every stupid fight we work through, every time you get me without me saying a word?
+                That’s the good stuff. The only stuff that matters.
+              </p>
+            </div>
+
+            <ol class="voice-shots">
+              <li class="voice-shot">
+                <span class="voice-shot__time">景别</span>
+                <span class="voice-shot__cue">中景 · 海边室外</span>
+                <p class="voice-shot__note">背景的海边风浪做虚化处理，突出人物。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">机位</span>
+                <span class="voice-shot__cue">平视，正对角色 1</span>
+                <p class="voice-shot__note">机位与人物视线齐平，视线直面镜头外对面的角色 2。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">构图</span>
+                <span class="voice-shot__cue">角色 1 居中</span>
+                <p class="voice-shot__note">站在海边室外的阳台栏杆侧，场景取【图片 1】的海边阳台风景。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">运镜</span>
+                <span class="voice-shot__cue">固定镜头，无运镜</span>
+                <p class="voice-shot__note">全程保持机位稳定，靠人物情绪与台词推进。</p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">人物</span>
+                <span class="voice-shot__cue">柔和带笑意 · 情绪轻松</span>
+                <p class="voice-shot__note">
+                  五官与妆造严格参考【图片 2】；角色 1 面向角色 2，完整说出这段独白。
+                </p>
+              </li>
+              <li class="voice-shot">
+                <span class="voice-shot__time">生成要求</span>
+                <span class="voice-shot__cue">无字幕纯净版</span>
+                <p class="voice-shot__note">
+                  避免画面出现字幕与 BGM；8K 高清电影画质，真实清晰。
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 02B · 短剧海报设计 ══════════ -->
+    <section class="section" id="poster">
+      <div class="section__head reveal">
+        <div>
+          <p class="eyebrow">Poster Design</p>
+          <h2 class="section__title">短剧 <em>海报设计</em></h2>
+          <p class="section__desc">竖版短剧海报 —— 从视觉概念、人物合成到字体排版与标题设计。</p>
+        </div>
+      </div>
+
+      <div class="poster-track" id="posterTrack">
+        <figure class="poster">
+          <img src="assets/img/poster-01.jpg" alt="短剧海报：My Professor Daddy is My Best Friend's Father" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-02.jpg" alt="短剧海报：Claimed by the Gangster Queen" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-05.jpg" alt="短剧海报：Seduced by My Boyfriend's Uncle" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-04.jpg" alt="短剧海报：From Wild Beast to House Pet" loading="lazy" />
+        </figure>
+
+        <span class="poster-track__divider" aria-hidden="true"></span>
+
+        <figure class="poster">
+          <img src="assets/img/poster-03.jpg" alt="短剧海报：The Empress Returns — Dragon's Wrath" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-06.jpg" alt="短剧海报：Reborn Bride — My Hunter is a Lord" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-07.jpg" alt="短剧海报：If I'd Cherished the Girl Who Loved Me" loading="lazy" />
+        </figure>
+        <figure class="poster">
+          <img src="assets/img/poster-08.jpg" alt="短剧海报：Never Your Daughter Again" loading="lazy" />
+        </figure>
+      </div>
+
+      <p class="poster-track__hint">自动滚动 · 悬停暂停 · 可左右拖动</p>
+    </section>
+
+    <!-- ══════════ 03 · 个人优势 ══════════ -->
+    <section class="section" id="strength">
+      <div class="section__head reveal">
+        <div>
+          <p class="eyebrow">Why Me</p>
+          <h2 class="section__title">个人 <em>优势</em></h2>
+          <p class="section__desc">我擅长什么、如何工作、能解决什么问题。</p>
+        </div>
+      </div>
+
+      <div class="adv-grid">
+        <article class="adv reveal" data-delay="1">
+          <div class="adv__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          </div>
+          <a class="adv__more" href="workflow.html">查看样表 ↗</a>
+          <h3 class="adv__title">我擅长什么</h3>
+          <p class="adv__text">
+            把模糊的想法变成可执行的影像方案：从剧本拆解、人物与场景资产，
+            到分镜执行与成片质检，五张表把整条链路管住。
+          </p>
+          <ul class="adv__chips">
+            <li>剧本拆解表</li><li>人物资产表</li><li>场景资产表</li><li>分镜执行表</li><li>成片质检表</li>
+          </ul>
+        </article>
+
+        <article class="adv adv--light reveal" data-delay="2">
+          <div class="adv__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-4h4v4"/></svg>
+          </div>
+          <a class="adv__more" href="process.html">查看流程 ↗</a>
+          <h3 class="adv__title">我如何工作</h3>
+          <p class="adv__text">
+            三步走：<b>拆解</b> —— 把目标拆成镜头与提示词；<b>快跑</b> —— 小步出样片快速迭代；
+            <b>落地</b> —— 控制预算与周期，把成片准时交付。
+          </p>
+          <ul class="adv__chips">
+            <li>快速出样</li><li>小步迭代</li><li>预算可控</li><li>准时交付</li>
+          </ul>
+        </article>
+
+        <article class="adv reveal" data-delay="3">
+          <div class="adv__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 4v6c0 4-3 6.5-7 8-4-1.5-7-4-7-8V7z"/><path d="M9.5 12l2 2 3.5-4"/></svg>
+          </div>
+          <a class="adv__more" href="solutions.html">查看解法 ↗</a>
+          <h3 class="adv__title">能解决什么</h3>
+          <p class="adv__text">
+            预算不够拍不起？AI 补足产能。周期太赶？生成与实拍并行。
+            风格不稳定？我用统一的视觉规范与提示词库锁住质感。
+          </p>
+          <ul class="adv__chips">
+            <li>降本增效</li><li>风格统一</li><li>并行生产</li><li>质量把控</li>
+          </ul>
+
+          <div class="adv-gallery">
+            <button class="adv-gallery__toggle" type="button" data-adv-toggle
+                    aria-expanded="false" aria-controls="solvePanel">
+              <span class="adv-gallery__plus" aria-hidden="true">+</span>
+              <span>工作流截图</span>
+              <span class="adv-gallery__count">4 张</span>
+            </button>
+
+            <div class="adv-gallery__panel" id="solvePanel" hidden>
+              <img src="assets/img/workflow/solve-1.jpg" alt="拆镜规则与 Skill 工作流截图" loading="lazy">
+              <img src="assets/img/workflow/solve-2.png" alt="AI 生图与资产库项目看板截图" loading="lazy">
+              <img src="assets/img/workflow/solve-3.png" alt="角色库人物设定表截图" loading="lazy">
+              <img src="assets/img/workflow/solve-4.jpg" alt="角色定妆与生成记录表截图" loading="lazy">
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════ 04 · 实拍经验 ══════════ -->
+    <section class="section" id="film">
+      <div class="section__head reveal">
+        <div>
+          <p class="eyebrow">On Set</p>
+          <h2 class="section__title">实拍 <em>经验</em></h2>
+          <p class="section__desc">镜头背后的现场功夫 —— 我参与过的实拍项目。</p>
+        </div>
+        <a class="btn btn--pill btn--ghost section__more" href="https://my-design-portfolio.my.canvasite.cn/my-design-portfolio" target="_blank" rel="noopener">
+          完整经历 <span class="btn__arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="film-list">
+        <a class="film-row reveal" href="project-resolve.html">
+          <span class="film-row__thumb film-row__thumb--1" aria-hidden="true"></span>
+          <span class="film-row__body">
+            <span class="film-row__title">DaVinci Resolve · 《黄金时刻》</span>
+            <span class="film-row__note">调色 / 交付 · 达芬奇一级与二级调色</span>
+          </span>
+          <span class="film-row__meta">2026</span>
+          <span class="film-row__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="film-row reveal" data-delay="1" href="project-qiangui.html">
+          <span class="film-row__thumb film-row__thumb--2" aria-hidden="true"></span>
+          <span class="film-row__body">
+            <span class="film-row__title">公益短片 · 《英勇黔行·点亮希望》</span>
+            <span class="film-row__note">导演 / 剪辑 · 贵州山村纪实拍摄</span>
+          </span>
+          <span class="film-row__meta">2025</span>
+          <span class="film-row__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="film-row reveal" data-delay="2" href="project-guilin-road.html">
+          <span class="film-row__thumb film-row__thumb--3" aria-hidden="true"></span>
+          <span class="film-row__body">
+            <span class="film-row__title">桂林公路 · 《我在》</span>
+            <span class="film-row__note">拍摄 / 剪辑 · 公路纪实短片</span>
+          </span>
+          <span class="film-row__meta">2026</span>
+          <span class="film-row__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="film-row reveal" data-delay="3" href="project-guilin-prison.html">
+          <span class="film-row__thumb film-row__thumb--4" aria-hidden="true"></span>
+          <span class="film-row__body">
+            <span class="film-row__title">桂林监狱 AE 片头</span>
+            <span class="film-row__note">AE 动效 · 变速剪辑与合成</span>
+          </span>
+          <span class="film-row__meta">2025</span>
+          <span class="film-row__go" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════════ 05 · 联系 / 页脚 ══════════ -->
+    <section class="contact" id="contact">
+      <div class="contact__inner reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 class="contact__title">有项目？<em>聊聊看</em></h2>
+        <p class="contact__desc">无论是 AI 影像、品牌片还是现场执行，欢迎随时找我。</p>
+        <div class="contact__actions">
+          <a class="btn btn--pill btn--light" href="mailto:283104584@qq.com">Say Hi <span class="btn__arrow">↗</span></a>
+          <a class="btn btn--pill btn--ghost" href="https://my-design-portfolio.my.canvasite.cn/my-design-portfolio" target="_blank" rel="noopener">我的实拍经历</a>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>© 2026 AI 执行导演 · Portfolio</span>
+        <span class="footer__dot" aria-hidden="true"></span>
+        <span>Designed in the cosmos</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      document.querySelectorAll("[data-adv-toggle]").forEach(function (toggle) {
+        var panel = document.getElementById(toggle.getAttribute("aria-controls"));
+        if (!panel) return;
+
+        toggle.addEventListener("click", function () {
+          var open = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!open));
+          panel.hidden = open;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

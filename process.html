@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我如何工作 · 拆解 / 快跑 / 落地 · AI 执行导演</title>
+  <meta name="description" content="AI 影像项目的工作方法：拆解（把目标拆成镜头与提示词）、快跑（小步出样片快速迭代）、落地（控预算与周期，准时交付）。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .proc {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 128px 24px 70px;
+    }
+
+    .proc__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 26px;
+      transition: color 0.3s;
+    }
+    .proc__back:hover { color: #fff; }
+
+    .proc__head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 720px;
+      margin-bottom: 46px;
+    }
+
+    .proc__title {
+      font-size: clamp(34px, 5.4vw, 62px);
+      line-height: 1.06;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .proc__title em {
+      font-family: var(--serif-en);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .proc__desc {
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--text-dim);
+    }
+
+    .step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 24px;
+      padding: 30px 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-card);
+      background: rgba(10, 14, 24, 0.7);
+      margin-bottom: 18px;
+    }
+
+    .step__no {
+      font-family: var(--display);
+      font-size: 46px;
+      line-height: 1;
+      color: rgba(109, 179, 255, 0.35);
+    }
+
+    .step__body h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .step__body p {
+      font-size: 13.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+
+    .step__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .step__list li {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: var(--r-pill);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      color: var(--text-dim);
+    }
+
+    /* 可展开的流程截图 */
+    .shots { margin-top: 20px; }
+
+    .shots__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 10px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .shots__toggle:hover {
+      color: #fff;
+      border-color: rgba(109, 179, 255, 0.45);
+      background: rgba(109, 179, 255, 0.1);
+    }
+
+    .shots__plus {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(109, 179, 255, 0.16);
+      border: 1px solid rgba(109, 179, 255, 0.38);
+      color: rgba(170, 210, 255, 0.95);
+      font-size: 15px;
+      line-height: 1;
+      transition: transform 0.35s var(--ease), background 0.3s;
+    }
+    .shots__toggle[aria-expanded="true"] .shots__plus {
+      transform: rotate(135deg);
+      background: rgba(109, 179, 255, 0.3);
+    }
+
+    .shots__count {
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+
+    .shots__panel {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      animation: shotsIn 0.4s var(--ease);
+    }
+    .shots__panel[hidden] { display: none; }
+
+    @keyframes shotsIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .shots__panel img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: block;
+      transition: transform 0.7s var(--ease), border-color 0.3s;
+    }
+    .shots__panel img:hover {
+      transform: scale(1.03);
+      border-color: rgba(109, 179, 255, 0.45);
+    }
+
+    .proc__note {
+      margin-top: 26px;
+      padding: 22px 24px;
+      border-radius: var(--r-card);
+      border: 1px solid rgba(109, 179, 255, 0.25);
+      background: rgba(109, 179, 255, 0.07);
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-dim);
+    }
+
+    .proc__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .proc__foot {
+      margin-top: 50px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 760px) {
+      .proc { padding: 108px 18px 48px; }
+      .step { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
+      .step__no { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="proc">
+    <a class="proc__back" href="index.html#strength">← 返回个人优势</a>
+
+    <div class="proc__head reveal">
+      <p class="eyebrow">Process · How I Work</p>
+      <h1 class="proc__title">我如何 <em>工作</em></h1>
+      <p class="proc__desc">
+        三步走：<b>拆解</b> —— 把目标拆成镜头与提示词；<b>快跑</b> —— 小步出样片快速迭代；
+        <b>落地</b> —— 控制预算与周期，把成片准时交付。
+        每一步都有明确的交付物与验收点，避免“做着做着就跑偏”。
+      </p>
+    </div>
+
+    <section class="step reveal">
+      <div class="step__no">01</div>
+      <div class="step__body">
+        <h2>拆解 —— 先把话说清楚</h2>
+        <p>
+          拿到剧本或需求，先不急着出画面：理清故事线、人物目标与情绪节奏，把文本拆成可拍摄的场次与镜头，
+          同步确认预算、周期与平台规格。这一步做完，五张表就已经成型，后面只是执行。
+        </p>
+        <ul class="step__list">
+          <li>剧本拆解表</li><li>人物 / 场景资产表</li><li>分镜执行表</li><li>预算与周期</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="step reveal" data-delay="1">
+      <div class="step__no">02</div>
+      <div class="step__body">
+        <h2>快跑 —— 用小样片试错</h2>
+        <p>
+          先做单镜头测试：光影、材质、角色一致性、运镜与节奏各跑一遍，用最小成本找到“对的那一版”，
+          再横向复制到整场戏。风格规范与提示词库在这步定稿，避免后期反复。
+        </p>
+        <ul class="step__list">
+          <li>镜头测试</li><li>角色一致性校准</li><li>光影与调色 LUT</li><li>提示词库沉淀</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="step reveal" data-delay="2">
+      <div class="step__no">03</div>
+      <div class="step__body">
+        <h2>落地 —— 按时交片</h2>
+        <p>
+          批量生成与实拍并行推进，剪辑、配音、字幕与混音按平台规格收口；
+          交付前用成片质检表逐项验收，有问题当场回炉，不留尾巴。
+        </p>
+        <ul class="step__list">
+          <li>批量生成</li><li>剪辑与调色</li><li>声音与字幕</li><li>成片质检表</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="shots">
+      <button class="shots__toggle" type="button" data-shots-toggle
+              aria-expanded="false" aria-controls="shotsPanel">
+        <span class="shots__plus" aria-hidden="true">+</span>
+        <span>流程截图</span>
+        <span class="shots__count">3 张</span>
+      </button>
+
+      <div class="shots__panel" id="shotsPanel" hidden>
+        <img src="assets/img/workflow/solve-1.jpg" alt="拆镜规则与 Skill 工作流截图" loading="lazy">
+        <img src="assets/img/workflow/solve-4.jpg" alt="角色定妆与生成记录表截图" loading="lazy">
+        <img src="assets/img/workflow/solve-2.png" alt="AI 生图与资产库项目看板截图" loading="lazy">
+      </div>
+    </div>
+
+    <p class="proc__note">
+      常见情况：预算不够拍不起？用 AI 补足产能。周期太赶？生成与实拍并行跑。
+      风格不稳定？用统一的视觉规范与提示词库把质感锁住。
+    </p>
+
+    <div class="proc__actions">
+      <a class="btn btn--cream" href="index.html#strength">返回个人优势</a>
+      <a class="btn btn--pill btn--ghost" href="workflow.html">看五张表 <span class="btn__arrow">↗</span></a>
+    </div>
+
+    <div class="proc__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Process · Three Steps</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      document.querySelectorAll("[data-shots-toggle]").forEach(function (toggle) {
+        var panel = document.getElementById(toggle.getAttribute("aria-controls"));
+        if (!panel) return;
+
+        toggle.addEventListener("click", function () {
+          var open = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!open));
+          panel.hidden = open;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

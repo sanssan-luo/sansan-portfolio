@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>《数字人配音》· 数字人配音 / AI 语音 · AI 执行导演</title>
+  <meta name="description" content="数字人配音项目详情 —— 15 秒竖版配音测试：人物声线设定、禁忌清单、发音规范与五段时间轴提示词。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .project__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+    .project__back:hover { color: #fff; }
+
+    .project__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .project__title {
+      font-family: var(--display);
+      font-size: clamp(32px, 5.6vw, 74px);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .project__cn {
+      font-family: var(--serif-cn);
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    .project__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project__tags li {
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(255, 122, 60, 0.45);
+      color: rgba(255, 158, 118, 0.95);
+      font-size: 12px;
+    }
+
+    .project__year {
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(245, 248, 255, 0.9);
+    }
+
+    .project__video {
+      margin-top: 46px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #04070e;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .project__video video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 78vh;
+    }
+
+    /* 两段配音测试并排 */
+    .project__videos {
+      max-width: 800px;
+      margin: 46px auto 0;
+    }
+
+    .project__videos .voice-panel { margin-top: 18px; }
+
+    .project__body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 54px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .project__body h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project__text {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--text-dim);
+    }
+    .project__text + .project__text { margin-top: 14px; }
+
+    .project__facts {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .project__facts div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .project__facts dt { color: var(--text-faint); letter-spacing: 0.06em; }
+    .project__facts dd { color: var(--text); text-align: right; }
+
+    .project__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .project__foot {
+      margin-top: 70px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 860px) {
+      .project { padding: 108px 18px 32px; }
+      .project__body { grid-template-columns: 1fr; gap: 34px; }
+      .project__videos { margin-top: 32px; }
+      .project__video video { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav is-in">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </header>
+
+  <main class="project">
+    <a class="project__back" href="index.html#voice">← 返回数字人配音</a>
+
+    <div class="project__head">
+      <div>
+        <p class="eyebrow">Project · Digital Human Voice</p>
+        <h1 class="project__title">Digital Human Voice</h1>
+        <p class="project__cn">《数字人配音》</p>
+        <ul class="project__tags">
+          <li>数字人配音</li>
+          <li>音色设计</li>
+          <li>口型同步</li>
+        </ul>
+      </div>
+      <span class="project__year">2026</span>
+    </div>
+
+    <section class="project__videos">
+      <div class="voice-row">
+        <figure class="voice-card">
+          <div class="voice-card__media">
+            <video id="voiceFilm" controls playsinline preload="metadata"
+                   poster="assets/img/digital-human-voice-poster.jpg"
+                   src="assets/video/digital-human-voice.mp4" aria-label="配音测试 01：街头小子"></video>
+            <span class="voice-card__badge">00:15</span>
+          </div>
+          <div class="voice-card__meta">
+            <span class="voice-card__name">配音测试 · 街头小子</span>
+            <span class="voice-card__sub">Voice Test 01 · 9:16</span>
+          </div>
+          <button class="voice-toggle" type="button" data-prompt="voice-prompt-detail-1"
+                  aria-expanded="false" aria-controls="voice-prompt-detail-1">
+            查看提示词内容 <span class="voice-toggle__icon" aria-hidden="true">+</span>
+          </button>
+        </figure>
+
+        <figure class="voice-card">
+          <div class="voice-card__media">
+            <video id="voiceFilm2" controls playsinline preload="metadata"
+                   poster="assets/img/voice-gangster-poster.jpg"
+                   src="assets/video/voice-gangster.mp4" aria-label="配音测试 02：街头混混头目"></video>
+            <span class="voice-card__badge">00:15</span>
+          </div>
+          <div class="voice-card__meta">
+            <span class="voice-card__name">配音测试 · 混混头目</span>
+            <span class="voice-card__sub">Voice Test 02 · 9:16</span>
+          </div>
+          <button class="voice-toggle" type="button" data-prompt="voice-prompt-detail-2"
+                  aria-expanded="false" aria-controls="voice-prompt-detail-2">
+            查看提示词内容 <span class="voice-toggle__icon" aria-hidden="true">+</span>
+          </button>
+        </figure>
+      </div>
+
+      <div class="voice-panels">
+        <div class="voice-panel" id="voice-prompt-detail-1" hidden>
+          <div class="voice-panel__head">
+            <div>
+              <p class="voice-panel__kicker">Prompt · 配音测试 01</p>
+              <p class="voice-panel__title">搞笑痞气街头青年 · 五段时间轴台词</p>
+            </div>
+            <button class="voice-panel__close" type="button" data-close="voice-prompt-detail-1">收起 ×</button>
+          </div>
+
+          <div class="voice-specs">
+            <div class="voice-spec">
+              <h4>人物设定</h4>
+              <p>
+                欧美青年街头混混，听觉年龄 20～26 岁；声线偏亮带点磨砂痞感，气息松散随性，说话吊儿郎当自带欠揍感，
+                拽里拽气又透着几分滑稽中二。满嘴街头烂梗，爱挑眉嗤笑，装狠又藏不住耍宝劲儿，
+                嚣张是装的，欠揍是真的，主打一个外强中干的搞笑痞气。
+              </p>
+            </div>
+            <div class="voice-spec voice-spec--warn">
+              <h4>禁忌</h4>
+              <p>
+                凶狠毒辣感、沉稳大叔音、标准播音腔、温柔青年嗓、歇斯底里嘶吼；
+                拒绝真戾气，主打装腔作势的搞笑拽感。
+              </p>
+            </div>
+            <div class="voice-spec">
+              <h4>发音规范</h4>
+              <p>
+                美式街头俚语口语，连读潦草轻快，咬字松垮带拖腔，语气跳脱戏谑，拽中带梗，
+                情绪层层加码装狠，搞笑感藏在语调反差里。
+              </p>
+            </div>
+          </div>
+
+          <ol class="voice-shots">
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:00 — 00:03</span>
+              <span class="voice-shot__cue">上下打量，故作惊讶，拽里带嘲</span>
+              <p class="voice-shot__line">Whoa, you actually showed up?</p>
+              <p class="voice-shot__note">
+                中等音量，声线上扬带戏谑感，气息松散拖着尾音，重音落在 actually；歪头挑眉打量对方，装出一脸意外，痞里痞气的嘲讽感拉满。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:03 — 00:06</span>
+              <span class="voice-shot__cue">嗤笑出声，一脸不屑，装狠耍帅</span>
+              <p class="voice-shot__line">You think you’re some big shot?</p>
+              <p class="voice-shot__note">
+                音量小幅抬高，裹挟鼻腔嗤笑，句中停顿 0.7 秒，重音加重 big shot；嗤笑一声歪嘴，满脸“你也配”的鄙夷，装腔作势的拽感自带笑点。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:06 — 00:09</span>
+              <span class="voice-shot__cue">往前凑步，虚张声势，欠揍挑衅</span>
+              <p class="voice-shot__line">C’mon, don’t make me laugh, man.</p>
+              <p class="voice-shot__note">
+                音量明显抬高，气息轻快带跳脱感，语速偏快吊儿郎当，重音砸在 laugh；摊手耸肩一脸无语，混混式装逼挑衅，又拽又滑稽。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:09 — 00:12</span>
+              <span class="voice-shot__cue">压嗓装狠，中二放话，搞笑反差</span>
+              <p class="voice-shot__line">I’ll ruin your whole weekend, bro.</p>
+              <p class="voice-shot__note">
+                音量骤然压低，故意压着嗓子装沙哑狠戾，短句停顿 0.3 秒，咬字刻意发狠又绷不住劲儿，重音落在 ruin；模仿老大气场放狠话，实则像小孩装凶，喜剧效果拉满。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:12 — 00:15</span>
+              <span class="voice-shot__cue">甩手赶人，拽拽收尾，痞气定格</span>
+              <p class="voice-shot__line">Now beat it before I change my mind.</p>
+              <p class="voice-shot__note">
+                音量回升到松散常态，气息慵懒散漫，语速轻快敷衍，尾音甩得随意又装酷；摆摆手赶人，一副“本大爷懒得跟你计较”的装逼样，搞笑混混形象彻底落地。
+              </p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="voice-panel" id="voice-prompt-detail-2" hidden>
+          <div class="voice-panel__head">
+            <div>
+              <p class="voice-panel__kicker">Prompt · 配音测试 02</p>
+              <p class="voice-panel__title">街头混混头目 · 五段时间轴台词</p>
+            </div>
+            <button class="voice-panel__close" type="button" data-close="voice-prompt-detail-2">收起 ×</button>
+          </div>
+
+          <div class="voice-specs">
+            <div class="voice-spec">
+              <h4>人物设定</h4>
+              <p>
+                欧美中年街头黑帮混混头目，听觉年龄 35～42 岁；声线粗粝低沉，自带常年烟酒浸染的磨砂厚重质感，
+                胸腔共鸣扎实，气息粗稳有力。混迹街头多年的老混混，浑身江湖痞气，说话蛮横嚣张却不浮躁，
+                自带久经场面的霸气狠劲，不靠嘶吼造势，仅凭沉厚语调就透出不好惹的压迫感，痞气里裹着沉淀下来的霸道。
+              </p>
+            </div>
+            <div class="voice-spec voice-spec--warn">
+              <h4>禁忌</h4>
+              <p>
+                清亮青年音、标准播音腔、尖细声线、歇斯底里嘶吼、绵软无力语调、轻浮跳脱尾音；
+                拒绝稚嫩感，主打沉淀后的市井狠戾气场。
+              </p>
+            </div>
+            <div class="voice-spec">
+              <h4>发音规范</h4>
+              <p>
+                美式底层街头口语，连读粗粝随性，咬字扎实不飘，重音沉稳有力，情绪层层加码，霸气感逐步递进。
+              </p>
+            </div>
+          </div>
+
+          <ol class="voice-shots">
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:00 — 00:03</span>
+              <span class="voice-shot__cue">斜睨对方，散漫霸气宣告地盘</span>
+              <p class="voice-shot__line">This is my block, got it?</p>
+              <p class="voice-shot__note">
+                中等偏低音量，胸腔粗放震动共鸣，气息粗稳厚重，语调下沉带痞气，重音压在 my block；漫不经心划定范围，老混混的底气浑然天成。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:03 — 00:06</span>
+              <span class="voice-shot__cue">嗤笑嘲讽，尽显不屑</span>
+              <p class="voice-shot__line">You really think you stand a chance?</p>
+              <p class="voice-shot__note">
+                音量小幅抬高，裹挟鼻腔轻蔑嗤笑，句中停顿 0.7 秒，重音加重 stand a chance；满脸玩味地嘲讽对手不自量力，霸气里带着见多世面的轻蔑。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:06 — 00:09</span>
+              <span class="voice-shot__cue">强硬施压，混混式威逼</span>
+              <p class="voice-shot__line">Don’t force me to teach you a lesson.</p>
+              <p class="voice-shot__note">
+                音量明显拔高，气息粗重发力，语速沉稳有力，重音砸在 teach you a lesson；居高临下放出警告，江湖混混的霸道蛮横感扑面而来。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:09 — 00:12</span>
+              <span class="voice-shot__cue">压低嗓音放狠话，狠戾暗藏</span>
+              <p class="voice-shot__line">Mess with me, you’ll pay for it.</p>
+              <p class="voice-shot__note">
+                音量骤然压低，声线更显粗哑暗沉，短句间隙停顿 0.3 秒，咬字狠戾扎实，重音落在 pay for it；压着嗓子撂狠话，中年混混的阴狠霸气藏在字句缝隙里。
+              </p>
+            </li>
+            <li class="voice-shot">
+              <span class="voice-shot__time">00:12 — 00:15</span>
+              <span class="voice-shot__cue">霸气收尾，定调掌控权</span>
+              <p class="voice-shot__line">Around here, I make the rules.</p>
+              <p class="voice-shot__note">
+                音量回升至沉厚平稳，气息粗稳绵长，语速放缓咬字掷地有声，尾音厚重干脆收声；一锤定音，街头混混头目的霸道掌控感彻底落地。
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <div class="project__body">
+      <div>
+        <h2>关于项目</h2>
+        <p class="project__text">
+          《数字人配音》是一组 15 秒的竖版配音测试 —— 用结构化提示词，把角色的声线、气息与情绪曲线锁死；
+          其中这支把欧美中年街头混混头目的嗓音固定在粗粝低沉、胸腔共鸣扎实的质感上，嚣张蛮横却不靠嘶吼造势。
+        </p>
+        <p class="project__text">
+          提示词分三层：人物设定确定听觉年龄与音色质感，禁忌清单排除清亮青年音、播音腔与歇斯底里，
+          发音规范约定美式底层街头口语的连读与重音；再往下是五段时间轴，逐句标注画面动作、英文台词与发音细节，
+          让音量、停顿与重音的推进都有据可依。
+        </p>
+
+        <div class="project__actions">
+          <a class="btn btn--cream" href="index.html#voice">查看完整配音提示词</a>
+        </div>
+      </div>
+
+      <dl class="project__facts">
+        <div><dt>项目类型</dt><dd>数字人配音 / AI 语音</dd></div>
+        <div><dt>我的角色</dt><dd>声线设定 / 提示词设计 / 混音</dd></div>
+        <div><dt>工作内容</dt><dd>音色控制 · 情绪曲线 · 口型同步</dd></div>
+        <div><dt>年份</dt><dd>2026</dd></div>
+        <div><dt>时长</dt><dd>00:15 · 9:16 竖版</dd></div>
+      </dl>
+    </div>
+
+    <div class="project__foot">
+      <span>© 2026 AI·DIRECTOR — AI 执行导演作品集</span>
+      <span>Selected Work · 06</span>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全部项目 · AI 执行导演</title>
+  <meta name="description" content="AI 执行导演 · 全部项目索引 —— AI 短剧、创意广告、实拍、后期与数字人配音项目，点击卡片查看完整项目详情。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ───────── 全部项目页 ───────── */
+    .archive {
+      position: relative;
+      z-index: 1;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 128px 24px 20px;
+    }
+
+    .archive__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 26px;
+      transition: color 0.3s;
+    }
+    .archive__back:hover { color: #fff; }
+
+    .archive__head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .archive__title {
+      font-size: clamp(40px, 6.6vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+    }
+    .archive__title em {
+      font-family: var(--serif-en);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .archive__desc {
+      font-size: 14.5px;
+      color: var(--text-dim);
+      max-width: 560px;
+    }
+
+    /* 统计 */
+    .archive__stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .archive__stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--line);
+      background: rgba(10, 15, 26, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .archive__stat b {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    /* 筛选 */
+    .archive__filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0 34px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 34px;
+    }
+
+    .chip {
+      padding: 10px 18px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: color 0.3s, background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .chip:hover { color: #fff; border-color: var(--line-strong); }
+    .chip.is-active {
+      background: #f4f6fb;
+      border-color: #f4f6fb;
+      color: #0a0e18;
+    }
+    .chip span {
+      margin-left: 7px;
+      font-size: 11px;
+      opacity: 0.55;
+    }
+
+    .archive__count {
+      margin-left: auto;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    /* 网格：桌面三列 */
+    @media (min-width: 1024px) {
+      .archive__grid { grid-template-columns: repeat(3, 1fr); }
+      .archive__grid .card__media { aspect-ratio: 16 / 11; }
+      .archive__grid .card:last-child:nth-child(odd) { grid-column: auto; }
+      .archive__grid .card:last-child:nth-child(odd) .card__media { aspect-ratio: 16 / 11; }
+    }
+    @media (max-width: 639px) {
+      .archive__grid { grid-template-columns: 1fr; }
+    }
+
+    .archive__grid .card.is-hidden { display: none; }
+
+    .archive__empty {
+      padding: 60px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-faint);
+    }
+
+    .archive__foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 64px;
+      padding: 30px 0 10px;
+      border-top: 1px solid var(--line);
+    }
+    .archive__foot p {
+      font-size: 13.5px;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cosmos" aria-hidden="true">
+    <canvas id="starfield"></canvas>
+    <div class="cosmos__grain"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="index.html" aria-label="返回首页">AI·DIRECTOR</a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="index.html#work">作品</a>
+      <a href="projects.html" class="is-active">全部项目</a>
+      <a href="index.html#strength">优势</a>
+      <a href="index.html#film">实拍</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+    <a class="btn btn--cream nav__cta" href="mailto:283104584@qq.com">
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+    <button class="nav__burger" id="navBurger" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav class="drawer__links">
+      <a href="index.html#work" data-drawer-link>作品 <em>Work</em></a>
+      <a href="projects.html" data-drawer-link>全部项目 <em>Archive</em></a>
+      <a href="index.html#strength" data-drawer-link>优势 <em>Strength</em></a>
+      <a href="index.html#film" data-drawer-link>实拍 <em>Film</em></a>
+      <a href="index.html#contact" data-drawer-link>联系 <em>Contact</em></a>
+    </nav>
+    <a class="btn btn--pill btn--light drawer__cta" href="index.html#contact" data-drawer-link>
+      Say Hi <span class="btn__arrow">↗</span>
+    </a>
+  </div>
+
+  <main class="archive" id="top">
+
+    <a class="archive__back" href="index.html">← 返回首页</a>
+
+    <div class="archive__head reveal">
+      <p class="eyebrow">Archive · All Projects</p>
+      <h1 class="archive__title">全部 <em>项目</em></h1>
+      <p class="archive__desc">
+        从 AI 短剧到创意广告 —— 这里汇总了我参与过的全部项目。
+        点开任意一张卡片，即可进入该项目的完整内容。
+      </p>
+      <div class="archive__stats">
+        <span class="archive__stat"><b>12</b> 个项目</span>
+        <span class="archive__stat"><b>10</b> 部 AI 短剧</span>
+        <span class="archive__stat"><b>2</b> 支 创意广告</span>
+      </div>
+    </div>
+
+    <div class="archive__filters reveal">
+      <button class="chip is-active" data-filter="all">全部<span>12</span></button>
+      <button class="chip" data-filter="drama">AI 短剧<span>10</span></button>
+      <button class="chip" data-filter="ad">创意广告<span>2</span></button>
+      <span class="archive__count" id="archiveCount">12 / 12</span>
+    </div>
+
+    <div class="work-grid archive__grid" id="archiveGrid">
+
+      <article class="card reveal" data-cat="drama">
+        <div class="card__media">
+          <img src="assets/img/project-mermaid-cover.png" alt="《In Love with the King of the Ocean》风暴中的帆船 场景概念图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《In Love with the King of the Ocean》</h2>
+          <p class="card__note">AI 叙事短片 · 风暴海难 · 导演 / 分镜 / 生成管线</p>
+          <ul class="card__tags">
+            <li>AI 短剧</li>
+            <li>风暴海难</li>
+            <li>完整成片</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-mermaid.html" aria-label="查看《In Love with the King of the Ocean》项目详情"></a>
+        <a class="card__hover-pill" href="project-mermaid.html" aria-label="查看案例">查看 — Ocean King</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="1">
+        <div class="card__media">
+          <img src="assets/img/project-sassy-cover.png" alt="《Claimed by the Gangster Queen》雾夜港口 场景图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《Claimed by the Gangster Queen》</h2>
+          <p class="card__note">GL 黑帮情感短片 · 叛逆少主 × 修车女孩 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>GL</li>
+            <li>黑帮</li>
+            <li>女强</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-sassy.html" aria-label="查看《Claimed by the Gangster Queen》项目详情"></a>
+        <a class="card__hover-pill" href="project-sassy.html" aria-label="查看案例">查看 — Gangster Queen</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="2">
+        <div class="card__media">
+          <img src="assets/img/project-bl-cover.png" alt="《Seduced by my boyfriend's uncle》晨光中的林间小径 场景图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">Seduced by my boyfriend's uncle</h2>
+          <p class="card__note">BL 情感剧集 · 晨光树林 · 导演 / 48 集</p>
+          <ul class="card__tags">
+            <li>BL 剧集</li>
+            <li>情感叙事</li>
+            <li>48 集</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-bl.html" aria-label="查看《Seduced by my boyfriend's uncle》项目详情"></a>
+        <a class="card__hover-pill" href="project-bl.html" aria-label="查看案例">查看 — Seduced by my boyfriend's uncle</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama">
+        <div class="card__media">
+          <img src="assets/img/project-dragon-cover.png" alt="《The Empress Returns: Dragon's Wrath》金色圣殿 场景图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《The Empress Returns: Dragon's Wrath》</h2>
+          <p class="card__note">西幻复仇短剧 · 崛起复仇 / 女强 / 身份反转 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>西幻</li>
+            <li>女强</li>
+            <li>复仇爽剧</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-dragon.html" aria-label="查看《The Empress Returns: Dragon's Wrath》项目详情"></a>
+        <a class="card__hover-pill" href="project-dragon.html" aria-label="查看案例">查看 — Dragon's Wrath</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="1">
+        <div class="card__media">
+          <img src="assets/img/project-exhusband-cover.jpg" alt="《Regret It, Ex-Husband》晨光下的中世纪城邦 场景概念图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《Regret It, Ex-Husband》</h2>
+          <p class="card__note">复仇爽剧 · 45 集 · 女性成长 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>复仇爽剧</li>
+            <li>玄幻</li>
+            <li>45 集</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-exhusband.html" aria-label="查看《Regret It, Ex-Husband》项目详情"></a>
+        <a class="card__hover-pill" href="project-exhusband.html" aria-label="查看案例">查看 — Regret It, Ex-Husband</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="2">
+        <div class="card__media">
+          <img src="assets/img/project-pucked-cover.jpg" alt="《Pucked by My Brother's Rival》冰球馆内场 场景概念图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《Pucked by My Brother's Rival》</h2>
+          <p class="card__note">冰球禁忌恋情 · 51 集竖版短剧 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>现代爱情</li>
+            <li>冰球运动</li>
+            <li>51 集</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-pucked.html" aria-label="查看《Pucked by My Brother's Rival》项目详情"></a>
+        <a class="card__hover-pill" href="project-pucked.html" aria-label="查看案例">查看 — Pucked by My Brother's Rival</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama">
+        <div class="card__media">
+          <img src="assets/img/project-smoke-cover.png" alt="《The Reborn Bride: My Hunter Husband Is a Lord》宫廷长廊 场景图" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《The Reborn Bride: My Hunter Husband Is a Lord》</h2>
+          <p class="card__note">西幻重生短剧 · 死亡婚宴 / 姐妹背叛 / 重生复仇 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>重生复仇</li>
+            <li>西幻宫廷</li>
+            <li>女强</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-smoke.html" aria-label="查看《The Reborn Bride: My Hunter Husband Is a Lord》项目详情"></a>
+        <a class="card__hover-pill" href="project-smoke.html" aria-label="查看案例">查看 — Reborn Bride</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama">
+        <div class="card__media">
+          <img src="assets/img/project-professor-cover.png" alt="《My Professor Daddy Is My Best Friend's Father!》美术教室 场景封面" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《My Professor Daddy Is My Best Friend's Father!》</h2>
+          <p class="card__note">BL 校园爱情 · 禁忌关系 / 师生 / 双男主 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>BL 校园</li>
+            <li>师生</li>
+            <li>双男主</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-professor.html" aria-label="查看《My Professor Daddy Is My Best Friend's Father!》项目详情"></a>
+        <a class="card__hover-pill" href="project-professor.html" aria-label="查看案例">查看 — 教授先生</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="1">
+        <div class="card__media">
+          <img src="assets/img/project-princess-cover.png" alt="《The Transformed Princess》Astra North Atelie 街道 场景封面" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《The Transformed Princess》</h2>
+          <p class="card__note">王室复仇 · 龙族 / 真假公主 / 重生蜕变 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>龙族</li>
+            <li>真假公主</li>
+            <li>复仇爽剧</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-princess.html" aria-label="查看《The Transformed Princess》项目详情"></a>
+        <a class="card__hover-pill" href="project-princess.html" aria-label="查看案例">查看 — The Transformed Princess</a>
+      </article>
+
+      <article class="card reveal" data-cat="ad">
+        <div class="card__media">
+          <img src="assets/img/project-audi-cover.png" alt="《Audi R8 · Night Pit Stop》夜间维修区换胎 场景封面" loading="lazy">
+          <span class="card__year">2025</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《Audi R8 · Night Pit Stop》</h2>
+          <p class="card__note">创意广告 · 汽车 / 夜戏维修区 · 概念 / 生成 / 成片</p>
+          <ul class="card__tags">
+            <li>创意广告</li>
+            <li>汽车</li>
+            <li>AI 生成</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-audi.html" aria-label="查看《Audi R8 · Night Pit Stop》项目详情"></a>
+        <a class="card__hover-pill" href="project-audi.html" aria-label="查看案例">查看 — Audi R8</a>
+      </article>
+
+      <article class="card reveal" data-cat="ad" data-delay="1">
+        <div class="card__media">
+          <img src="assets/img/project-horse-cover.jpg" alt="《马年大吉》金红云海与腾跃骏马 场景封面" loading="lazy">
+          <span class="card__year">2025</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《马年大吉 · Year of the Horse》</h2>
+          <p class="card__note">创意广告 · 节庆 / 中国风 / 金红云海 · 概念 / 生成 / 合成</p>
+          <ul class="card__tags">
+            <li>创意广告</li>
+            <li>节庆</li>
+            <li>中国风</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-horse.html" aria-label="查看《马年大吉 · Year of the Horse》项目详情"></a>
+        <a class="card__hover-pill" href="project-horse.html" aria-label="查看案例">查看 — 马年大吉</a>
+      </article>
+
+      <article class="card reveal" data-cat="drama" data-delay="2">
+        <div class="card__media">
+          <img src="assets/img/project-badmaster-cover.png" alt="《From Wild Beast to House Pet》草原庄园 场景封面" loading="lazy">
+          <span class="card__year">2026</span>
+        </div>
+        <div class="card__meta">
+          <h2 class="card__name">《From Wild Beast to House Pet》</h2>
+          <p class="card__note">My Beast Tamer Wife · AI 短剧 / 甜宠喜剧 / 先婚后爱 · 导演 / 成片</p>
+          <ul class="card__tags">
+            <li>AI 短剧</li>
+            <li>甜宠喜剧</li>
+            <li>2026</li>
+          </ul>
+        </div>
+        <a class="card__link" href="project-badmaster.html" aria-label="查看《From Wild Beast to House Pet》项目详情"></a>
+        <a class="card__hover-pill" href="project-badmaster.html" aria-label="查看案例">查看 — Wild Beast to House Pet</a>
+      </article>
+
+    </div>
+
+    <p class="archive__empty" id="archiveEmpty" hidden>该项目分类下暂时没有内容。</p>
+
+    <div class="archive__foot">
+      <p>合作 / 项目咨询 —— 随时找我聊聊。</p>
+      <a class="btn btn--pill btn--light" href="index.html#contact">Say Hi <span class="btn__arrow">↗</span></a>
+    </div>
+
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var chips = document.querySelectorAll(".chip[data-filter]");
+      var cards = document.querySelectorAll("#archiveGrid .card");
+      var countEl = document.getElementById("archiveCount");
+      var emptyEl = document.getElementById("archiveEmpty");
+      var total = cards.length;
+
+      function apply(filter) {
+        var shown = 0;
+        cards.forEach(function (card) {
+          var match = filter === "all" || card.getAttribute("data-cat") === filter;
+          card.classList.toggle("is-hidden", !match);
+          if (match) {
+            shown++;
+            card.classList.add("is-visible");
+          }
+        });
+        if (countEl) countEl.textContent = shown + " / " + total;
+        if (emptyEl) emptyEl.hidden = shown !== 0;
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          chips.forEach(function (c) { c.classList.remove("is-active"); });
+          chip.classList.add("is-active");
+          apply(chip.getAttribute("data-filter"));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
